@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Env files (NEVER commit these)
+.env
+.env.*
+!.env.example
+
+# Vercel / Netlify / Deployment
+.vercel
+.netlify
+
+# Testing
+/coverage
+
+# Caches
+.eslintcache
+.vite
+.next
+
+# Build outputs
+build
+out
+.output
+
+# Note on Lockfiles:
+# We intentionally DO NOT ignore package-lock.json, yarn.lock, or pnpm-lock.yaml
+# You should always commit your lockfiles so Vercel builds with the exact same dependencies!
