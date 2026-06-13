@@ -83,7 +83,9 @@ export default function Hero() {
       />
 
       {/* Fixed vertical email — pinned to left edge of viewport */}
-      <motion.div
+      <motion.a
+        href="mailto:deepak.tiwari.engineer@gmail.com"
+        className="hero-email"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
@@ -99,12 +101,14 @@ export default function Hero() {
           letterSpacing: '0.18em',
           fontFamily: "'JetBrains Mono', monospace",
           whiteSpace: 'nowrap',
-          userSelect: 'none',
-          pointerEvents: 'none',
+          textDecoration: 'none',
+          transition: 'color 0.2s',
         }}
+        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#39D98A')}
+        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#3A3A50')}
       >
         deepak.tiwari.engineer@gmail.com
-      </motion.div>
+      </motion.a>
 
       {/* Main content */}
       <div style={{ position: 'relative', zIndex: 2 }}>
@@ -238,7 +242,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 style={{ color: '#444458', transition: 'color 0.2s, transform 0.2s', display: 'inline-block' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#F0F0F5'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#39D98A'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#444458'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
               >
                 <Icon size={18} strokeWidth={1.5} />
@@ -258,18 +262,39 @@ export default function Hero() {
             Download CV
           </a>
         </motion.div>
+
+        {/* Mobile-only stats inline below socials/CV */}
+        <ScrollReveal
+          direction="up"
+          delay={0.55}
+          className="hero-stats-mobile"
+          style={{
+            marginTop: '36px',
+            gap: '24px',
+          }}
+        >
+          {STATS.map(stat => (
+            <div key={stat.label} style={{ flex: '1 1 auto', minWidth: '90px' }}>
+              <div style={{ fontSize: '24px', fontWeight: 700, color: '#39D98A', lineHeight: 1.1, fontFamily: "'Space Grotesk', sans-serif" }}>
+                {stat.value}
+              </div>
+              <div style={{ fontSize: '10px', color: '#555568', fontFamily: "'Inter', sans-serif", marginTop: '4px', lineHeight: 1.3 }}>
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </ScrollReveal>
       </div>
 
-      {/* Stats — bottom right */}
       <ScrollReveal
         direction="up"
         delay={0.3}
+        className="hero-stats"
         style={{
           position: 'absolute',
           right: 'clamp(40px, 8vw, 120px)',
           bottom: 'clamp(40px, 6vh, 80px)',
           textAlign: 'right',
-          display: 'flex',
           flexDirection: 'column',
           gap: '12px',
         }}
@@ -296,6 +321,21 @@ export default function Hero() {
         @keyframes pulse {
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.5; transform: scale(1.4); }
+        }
+        .hero-stats {
+          display: flex;
+        }
+        .hero-stats-mobile {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .hero-stats {
+            display: none !important;
+          }
+          .hero-stats-mobile {
+            display: flex !important;
+            flex-wrap: wrap;
+          }
         }
       `}</style>
     </section>

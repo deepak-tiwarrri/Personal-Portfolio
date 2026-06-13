@@ -5,9 +5,10 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import PlayZone from './components/PlayZone';
 import Footer from './components/Footer';
 
-const SECTIONS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+const SECTIONS = ['home', 'about', 'skills', 'experience', 'projects', 'play', 'contact'];
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -48,10 +49,11 @@ export default function App() {
       }}
     >
       {/* Fixed navigation */}
-      <Navbar />
+      <Navbar activeSection={activeSection} />
 
       {/* Right scroll progress bar */}
       <div
+        className="scroll-rail"
         style={{
           position: 'fixed',
           right: '32px',
@@ -109,8 +111,21 @@ export default function App() {
         <Skills />
         <Experience />
         <Projects />
+        <PlayZone />
         <Footer />
       </main>
+
+      {/* Global responsive rules for fixed chrome (rail + rotated email) */}
+      <style>{`
+        /* The vertical email rail in the hero crowds small screens */
+        @media (max-width: 900px) {
+          .scroll-rail { right: 16px !important; }
+        }
+        @media (max-width: 768px) {
+          .scroll-rail { display: none !important; }
+          .hero-email { display: none !important; }
+        }
+      `}</style>
     </div>
   );
 }

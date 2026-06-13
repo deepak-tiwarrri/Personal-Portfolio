@@ -73,7 +73,7 @@ export default function Experience() {
             }}
           >
             <div style={{ marginBottom: '4px' }}>
-              <span style={{ fontSize: '13px', color: '#444458', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
+              <span style={{ fontSize: '13px', color: '#39D98A', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
                 {exp.company}
               </span>
             </div>
@@ -91,7 +91,7 @@ export default function Experience() {
               >
                 {exp.role}
               </h3>
-              <span style={{ fontSize: '13px', color: '#444458', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em', whiteSpace: 'nowrap', paddingTop: '6px' }}>
+              <span style={{ fontSize: '13px', color: '#39D98A', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em', whiteSpace: 'nowrap', paddingTop: '6px' }}>
                 {exp.duration}
               </span>
             </div>

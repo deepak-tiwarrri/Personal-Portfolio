@@ -30,7 +30,6 @@ const PROJECTS: Project[] = [
     desc: 'Responsive e-commerce platform with product listing, search, filtering, and protected routes.',
     stack: ['ReactJS', 'Material-UI', 'Responsive Design'],
     gradient: 'linear-gradient(135deg, #1A0D2D 0%, #3D1A5C 100%)',
-    github: '#',
     live: 'https://qkartfronthook.netlify.app/',
   },
 ];
@@ -112,26 +111,36 @@ export default function Projects() {
               ))}
             </div>
 
-            {/* Icon buttons */}
+            {/* Icon buttons — only render links that actually exist */}
             <div style={{ display: 'flex', gap: '12px', flexShrink: 0 }}>
-              <a
-                href={project.github}
-                onClick={e => e.stopPropagation()}
-                style={{ color: '#333348', transition: 'color 0.2s', display: 'flex' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#F0F0F5')}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#333348')}
-              >
-                <Github size={17} strokeWidth={1.5} />
-              </a>
-              <a
-                href={project.live}
-                onClick={e => e.stopPropagation()}
-                style={{ color: '#333348', transition: 'color 0.2s', display: 'flex' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#F0F0F5')}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#333348')}
-              >
-                <ExternalLink size={17} strokeWidth={1.5} />
-              </a>
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.name} source on GitHub`}
+                  onClick={e => e.stopPropagation()}
+                  style={{ color: '#333348', transition: 'color 0.2s', display: 'flex' }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#F0F0F5')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#333348')}
+                >
+                  <Github size={17} strokeWidth={1.5} />
+                </a>
+              )}
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.name} live demo`}
+                  onClick={e => e.stopPropagation()}
+                  style={{ color: '#333348', transition: 'color 0.2s', display: 'flex' }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#F0F0F5')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#333348')}
+                >
+                  <ExternalLink size={17} strokeWidth={1.5} />
+                </a>
+              )}
             </div>
           </motion.div>
         ))}

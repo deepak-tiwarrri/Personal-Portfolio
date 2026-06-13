@@ -45,6 +45,11 @@ dist-ssr
 build
 out
 .output
+# Ignore all markdown files except README.md
+*.md
+**/*.md
+!README.md
+!**/README.md
 
 # Note on Lockfiles:
 # We intentionally DO NOT ignore package-lock.json, yarn.lock, or pnpm-lock.yaml

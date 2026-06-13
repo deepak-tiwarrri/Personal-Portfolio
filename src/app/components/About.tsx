@@ -79,7 +79,7 @@ export default function About() {
           </div>
 
           {/* Quote */}
-          <blockquote style={{ borderLeft: '2px solid #39D98A', paddingLeft: '20px', color: '#555568', fontStyle: 'italic', fontSize: '15px', fontFamily: "'Inter', sans-serif", lineHeight: 1.7 }}>
+          <blockquote style={{ borderLeft: '2px solid #39D98A', paddingLeft: '20px', color: '#39D98A', fontStyle: 'italic', fontSize: '15px', fontFamily: "'Inter', sans-serif", lineHeight: 1.7, opacity: 0.85 }}>
             "Code is poetry when every line serves a purpose."
           </blockquote>
         </ScrollReveal>

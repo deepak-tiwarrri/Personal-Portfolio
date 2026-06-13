@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useInView } from '../hooks/useInView';
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Code2 } from 'lucide-react';
 import ScrollReveal from './ui/ScrollReveal';
 
@@ -53,24 +53,55 @@ const SKILL_GROUPS: { category: string; skills: Skill[] }[] = [
 
 function SkillItem({ skill, delay }: { skill: Skill; delay: number }) {
   const [hovered, setHovered] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Cursor-following 3D tilt — raw pointer offset (-0.5..0.5) smoothed by a spring
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 220, damping: 18 });
+  const sy = useSpring(py, { stiffness: 220, damping: 18 });
+  const rotateX = useTransform(sy, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-8, 8]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+
+  const reset = () => {
+    setHovered(false);
+    px.set(0);
+    py.set(0);
+  };
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.4 }}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={reset}
+      whileHover={{ scale: 1.06 }}
       style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 600,
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
         padding: '10px 16px',
         borderRadius: '8px',
-        background: hovered ? 'rgba(57,217,138,0.06)' : 'transparent',
-        border: `1px solid ${hovered ? 'rgba(57,217,138,0.2)' : '#1A1A2A'}`,
+        background: hovered ? 'rgba(57,217,138,0.08)' : 'transparent',
+        border: `1px solid ${hovered ? 'rgba(57,217,138,0.45)' : '#1A1A2A'}`,
+        boxShadow: hovered ? '0 8px 26px rgba(57,217,138,0.18), inset 0 0 12px rgba(57,217,138,0.06)' : 'none',
         cursor: 'default',
-        transition: 'all 0.2s',
+        transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
+        willChange: 'transform',
       }}
     >
       <img
@@ -81,7 +112,7 @@ function SkillItem({ skill, delay }: { skill: Skill; delay: number }) {
         style={{ objectFit: 'contain', flexShrink: 0, filter: skill.name === 'Express.js' ? 'invert(1) brightness(0.7)' : 'none' }}
         onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
       />
-      <span style={{ fontSize: '13px', color: hovered ? '#F0F0F5' : '#8888A8', fontFamily: "'Inter', sans-serif", whiteSpace: 'nowrap', fontWeight: 500 }}>
+      <span style={{ fontSize: '13px', color: hovered ? '#F0F0F5' : '#8888A8', fontFamily: "'Inter', sans-serif", whiteSpace: 'nowrap', fontWeight: 500, transition: 'color 0.2s' }}>
         {skill.name}
       </span>
     </motion.div>

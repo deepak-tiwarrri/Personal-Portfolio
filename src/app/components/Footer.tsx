@@ -33,7 +33,7 @@ const FAQ_ITEMS = [
   },
 ];
 
-function AccordionItem({ q, a, index }: { q: string; a: string; index: number }) {
+function AccordionItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -152,15 +152,15 @@ export default function Footer() {
 
       {/* FAQ Section */}
       <div style={{ padding: 'clamp(60px, 8vw, 100px) clamp(60px, 10vw, 160px)' }}>
-        <ScrollReveal direction="left" distance={20}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '40px' }}>
-            <HelpCircle size={14} color="#39D98A" />
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#39D98A', letterSpacing: '0.12em' }}>FREQUENTLY ASKED QUESTIONS</span>
-          </div>
-        </ScrollReveal>
-        <div style={{ maxWidth: '720px' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <ScrollReveal direction="up" distance={20}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '40px', justifyContent: 'center' }}>
+              <HelpCircle size={14} color="#39D98A" />
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#39D98A', letterSpacing: '0.12em' }}>FREQUENTLY ASKED QUESTIONS</span>
+            </div>
+          </ScrollReveal>
           {FAQ_ITEMS.map((item, i) => (
-            <AccordionItem key={i} q={item.q} a={item.a} index={i} />
+            <AccordionItem key={i} q={item.q} a={item.a} />
           ))}
         </div>
       </div>
@@ -215,13 +215,13 @@ export default function Footer() {
             { icon: Github, label: 'GitHub', href: 'https://github.com/deepak-tiwarrri', handle: 'github.com/deepak-tiwarrri' },
             { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/deepak-tiwarrri', handle: 'linkedin.com/in/deepak-tiwarrri' },
             { icon: XIcon, label: 'X', href: 'https://x.com/deepak_tiwarrri', handle: '@deepak_tiwarrri' },
-            { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/deepak-tiwarrri', handle: '@deepak_tiwarrri' },
+            { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/deepak_tiwarrri', handle: '@deepak_tiwarrri' },
           ].map(({ icon: Icon, label, href, handle }) => (
             <a
               key={label}
               href={href}
               style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: '#444458', transition: 'color 0.2s' }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#F0F0F5')}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#39D98A')}
               onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#444458')}
             >
               <Icon size={16} strokeWidth={1.5} />
