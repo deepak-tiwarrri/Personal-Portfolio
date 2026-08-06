@@ -22,7 +22,7 @@ const PROJECTS: Project[] = [
     stack: ['ReactJS', 'Redux Toolkit', 'TailwindCSS', 'Node.js', 'Express', 'MongoDB'],
     gradient: 'linear-gradient(135deg, #0D1F2D 0%, #1A3A5C 100%)',
     github: 'https://github.com/deepak-tiwarrri/Blog-Application',
-    live: 'http://143.110.176.25.nip.io/',
+    live: 'https://blog-application-liard-nine.vercel.app/',
   },
   {
     num: '_02.',
